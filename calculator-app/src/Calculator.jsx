@@ -3,8 +3,8 @@ import Button from "./Button";
 import Input from "./Input";
 
 const Calculator = () => {
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState("");
+  const [input, setInput] = useState(""); // Stores the input expression
+  const [result, setResult] = useState(""); // Stores the result or error message
 
   const handleButtonClick = (value) => {
     if (value === "=") {
@@ -13,7 +13,7 @@ const Calculator = () => {
         setResult("Error");
       } else {
         try {
-          // Using eval to calculate the result
+          // Using eval to calculate the result (for simplicity)
           const output = eval(input); // eslint-disable-line no-eval
 
           // Check for division by zero
@@ -27,6 +27,7 @@ const Calculator = () => {
             setResult(output);
           }
         } catch (error) {
+          // If an error occurs in eval, set result to Error
           setResult("Error");
         }
       }
@@ -35,8 +36,8 @@ const Calculator = () => {
       setInput("");
       setResult("");
     } else {
-      // Update the input
-      setInput(input + value);
+      // Update the input with the clicked button value
+      setInput((prevInput) => prevInput + value);
     }
   };
 
