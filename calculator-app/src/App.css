@@ -24,7 +24,6 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-family: 'Times New Roman', Times, serif;
 }
 
 .result input{
@@ -35,7 +34,6 @@
   padding: 10px;
   border: none;
   color: #adaaaa;
-  font-family: 'Times New Roman', Times, serif;
 }
 
 .buttons{
