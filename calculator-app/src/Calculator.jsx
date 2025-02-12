@@ -3,8 +3,8 @@ import Button from "./Button";
 import Input from "./Input";
 
 const Calculator = () => {
-  const [input, setInput] = useState(""); // Stores the input expression
-  const [result, setResult] = useState(""); // Stores the result or error message
+  const [input, setInput] = useState(""); 
+  const [result, setResult] = useState(""); 
 
   const handleButtonClick = (value) => {
     if (value === "=") {
