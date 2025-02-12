@@ -8,16 +8,20 @@ const Calculator = () => {
 
   const handleButtonClick = (value) => {
     if (value === "=") {
-      if (!input || /[+\-*/.]/.test(input.charAt(input.length - 1))) {
-        // If input is empty or ends with an operator (invalid expression)
+      // If input is empty or ends with an operator, show Error
+      if (!input || /[+\-*/.]$/.test(input)) {
         setResult("Error");
       } else {
         try {
-          // eslint-disable-next-line no-eval
-          const output = eval(input); // Use eval to compute the expression
+          // Using eval to calculate the result
+          const output = eval(input); // eslint-disable-line no-eval
+
+          // Check for division by zero
           if (output === Infinity) {
             setResult("Infinity");
-          } else if (Number.isNaN(output)) {
+          }
+          // Check for NaN (i.e., 0 / 0)
+          else if (Number.isNaN(output)) {
             setResult("NaN");
           } else {
             setResult(output);
@@ -27,17 +31,18 @@ const Calculator = () => {
         }
       }
     } else if (value === "C") {
+      // Clear the input and result
       setInput("");
       setResult("");
     } else {
+      // Update the input
       setInput(input + value);
     }
   };
 
-
   return (
     <div className="calculator">
-        <h1>React Calculator</h1>
+      <h1>React Calculator</h1>
       <Input value={input} />
       <div className="result">
         <input type="text" value={result} readOnly />
