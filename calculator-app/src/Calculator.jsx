@@ -44,7 +44,9 @@ const Calculator = () => {
   return (
     <div className="calculator">
       <h1>React Calculator</h1>
-      <Input value={input} />
+      <div className="input">
+        <Input value={input} />
+      </div>
       <div className="result">
         <input type="text" value={result} readOnly />
       </div>
