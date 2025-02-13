@@ -16,7 +16,7 @@
   background-color: white;
 }
 
-.input-field input{
+.input input{
   width: 200px;
   height: 20px;
   text-align: left;
@@ -33,7 +33,7 @@
   font-size: 20px;
   padding: 10px;
   border: none;
-  color: #adaaaa;
+  color: #928d8d;
 }
 
 .buttons{
