@@ -1,53 +1,43 @@
 import React, { useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
+import "./Calculator.css"; // You can create and style this CSS file
 
-const Calculator = () => {
-  const [input, setInput] = useState(""); 
-  const [result, setResult] = useState(""); 
+function Calculator() {
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState("");
 
- const handleButtonClick = (value) => {
-   console.log("Button clicked:", value); // Debugging input
-   if (value === "=") {
-     if (!input || /[+\-*/.]$/.test(input)) {
-       console.log("Incomplete expression detected");
-       setResult("Error");
-     } else {
-       try {
-         console.log("Evaluating:", input); // Debugging the input
-         const output = eval(input); // eslint-disable-line no-eval
-         console.log("Calculation result:", output); // Debugging the output
+  const handleButtonClick = (value) => {
+    setInput((prev) => prev + value);
+  };
 
-         if (output === Infinity || output === -Infinity) {
-           setResult("Infinity");
-         } else if (Number.isNaN(output)) {
-           setResult("NaN");
-         } else {
-           setResult(output);
-         }
-       } catch (error) {
-         console.error("Error during calculation:", error); // Debugging error
-         setResult("Error");
-       }
-     }
-   } else if (value === "C") {
-     setInput("");
-     setResult("");
-   } else {
-     setInput((prevInput) => prevInput + value);
-   }
- };
+  const handleClear = () => {
+    setInput("");
+    setResult("");
+  };
+
+  const handleEqual = () => {
+    try {
+      if (input === "") {
+        setResult("Error");
+      } else {
+        const evalResult = eval(input);
+        if (evalResult === Infinity) {
+          setResult("Infinity");
+        } else if (isNaN(evalResult)) {
+          setResult("NaN");
+        } else {
+          setResult(evalResult);
+        }
+      }
+    } catch (error) {
+      setResult("Error");
+    }
+  };
 
 
   return (
     <div className="calculator">
-      <h1>React Calculator</h1>
-      <div className="input">
-        <Input value={input} />
-      </div>
-      <div className="result">
-        <input type="text" value={result} readOnly />
-      </div>
+      <input type="text" value={input} readOnly />
+      <div className="result">{result}</div>
       <div className="buttons">
         {[
           "7",
@@ -67,11 +57,22 @@ const Calculator = () => {
           "=",
           "/",
         ].map((btn) => (
-          <Button key={btn} label={btn} onClick={handleButtonClick} />
+          <button
+            key={btn}
+            onClick={
+              btn === "="
+                ? handleEqual
+                : btn === "C"
+                ? handleClear
+                : () => handleButtonClick(btn)
+            }
+          >
+            {btn}
+          </button>
         ))}
       </div>
     </div>
   );
-};
+}
 
 export default Calculator;
